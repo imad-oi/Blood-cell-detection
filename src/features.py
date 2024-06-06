@@ -112,9 +112,15 @@ def extract_features(region,image_rgb):
 # function pour faire la segmentation et l'extraction
 
 def process_images(rgb_images, images_label, labeled_features,display_images=False):
-    for image_rgb, image_label in zip(rgb_images, images_label):
+    for index, (image_rgb, image_label) in enumerate(zip(rgb_images, images_label)):
         regions,output_image= kmeans_extract_cell_properties(image_rgb)
         count_cells_in_image = len(regions)
+
+        # calculer le perimtre moyenne des cellules segmentées dans chaque image
+        avg_perimeter = np.mean([region.perimeter for region in regions])
+
+        # calculer le std du perimtre des cellules segmentées dans chaque image
+        std_perimeter = np.std([region.perimeter for region in regions])
         
         features = []
         
@@ -130,20 +136,23 @@ def process_images(rgb_images, images_label, labeled_features,display_images=Fal
             plt.axis('off')
         
         for region, region_features in zip(regions, features):
-            minr, minc, maxr, maxc = region.bbox
-            rect = Rectangle((minc, minr), maxc - minc, maxr - minr, fill=False, edgecolor='red', linewidth=2)
-            plt.gca().add_patch(rect)
-            floored_color = tuple(map(int, region_features["color"]))
-            # plt.text(minc, minr - 10, f'Area: {region.area:.2f}\nPerimeter: {region.perimeter:.2f}\nAspect Ratio: {region.major_axis_length / region.minor_axis_length:.2f}\nColor: {floored_color}\nTexture: {region_features["contrast"]:.2f}', color='red')
-            region_features["area"] = region.area
-            region_features["perimeter"] = region.perimeter
-            region_features["aspect_ratio"] = region.major_axis_length / (region.minor_axis_length + 1e-10)
-            region_features["label"] = image_label
-            labeled_features.append(region_features)
+            if region.perimeter <= avg_perimeter + std_perimeter :
+                minr, minc, maxr, maxc = region.bbox
+                rect = Rectangle((minc, minr), maxc - minc, maxr - minr, fill=False, edgecolor='red', linewidth=2)
+                plt.gca().add_patch(rect)
+                floored_color = tuple(map(int, region_features["color"]))
+                # plt.text(minc, minr - 10, f'Area: {region.area:.2f}\nPerimeter: {region.perimeter:.2f}\nAspect Ratio: {region.major_axis_length / region.minor_axis_length:.2f}\nColor: {floored_color}\nTexture: {region_features["contrast"]:.2f}', color='red')
+                region_features["area"] = region.area
+                region_features["perimeter"] = region.perimeter
+                region_features["aspect_ratio"] = region.major_axis_length / (region.minor_axis_length + 1e-10)
+                region_features["label"] = image_label
+                # ajouter l'index de l'image
+                region_features["image_index"] = index
+                labeled_features.append(region_features)
             
-        if display_images:
-            plt.axis('off')
-            plt.show()
+        # if display_images:
+        #     plt.axis('off')
+        #     plt.show()
 
 # ========================================
 # fonction pour preparer les colonnes à l'entrainement et la prédiction

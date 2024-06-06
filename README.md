@@ -8,6 +8,8 @@ ciale pour un diagnostic précoce du cancer, notamment la leucémie lymphoblasti
 (ALL), afin d’améliorer les chances de traitement et les résultats cliniques pour les pa-
 tients
 
+![Web App](web-app.png)
+
 # Structure de projet
 ```bash
 ├───data
@@ -32,6 +34,7 @@ tients
 │       ├───PreB
 │       └───ProB
 ├───models
+├───flask
 ├───notebooks
 └───src
 ```
@@ -41,6 +44,9 @@ Ce répertoire contient le jeu de données utilisé dans ce projet. Il comprend 
 
 ## Models
 Ce répertoire contient les modèles entraînés.
+
+## Flask
+Ce répertoire contient une application web avec flask.
 
 ## notebooks 
 Ce répertoire contient le notebook détaillant toutes les étapes et les processus effectués pour réaliser ce projet.
@@ -53,4 +59,4 @@ Ce répertoire contient deux fichiers :
 # Résultats
 | modèle | KNN       | SVM       | Arbre de decision | Foret Aleatoire |
 |-----------|-----------|-----------|-------------------|-----------------|
-| Précision (%) |    96.2   |     100   |       100         |     100         |"# Blood-cell-detection" 
+| Précision (%) |    92.6   |     93.1   |      88.9         |     92.9        |"# Blood-cell-detection" 

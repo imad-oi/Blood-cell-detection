@@ -1,2 +1,10 @@
 /data
 /models
+/myenv
+
+src/inference2.py
+src/inference.py
+
+notebooks/blood-cell-detection copy 2-Copy1.ipynb
+notebooks/blood-cell-detection copy.ipynb
+notebooks/blood-cell-detection.ipynb

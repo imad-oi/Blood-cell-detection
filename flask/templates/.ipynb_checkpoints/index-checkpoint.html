@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HemaVision Engineering Program</title>
+    <link rel="stylesheet" href="../static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">HemaVision</div>
+        <nav>
+          <ul>
+            <li><a href="#"> Why HemaVision </a></li>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">Insights</a></li>
+            <li><a href="#">Sign in</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="hero">
+        <h1>Blood Cell Image Analysis</h1>
+        <p>
+          We employ machine learning techniques to examine images of blood cells with the aim of detecting Acute Lymphoblastic Leukemia (ALL) at an early stage.
+        </p>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button onclick="search()">Search</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="topics">
+        <p>
+          Upload an image and apply various image processing techniques to
+          extract information from the image.
+        </p>
+        <!-- <button>All</button> -->
+        <!-- <button>API</button> -->
+        <!-- <button>Containers</button> -->
+        <!-- <button>Languages</button> -->
+        <!-- <button>Machine Learning</button> -->
+        <!-- <button>Networking</button> -->
+        <!-- <button>Node.js</button> -->
+        <!-- <button>Security</button> -->
+      </div>
+      <div class="images">
+        <!-- <img src="{{ url_for('static', filename='images/a_channel_Benign8.png') }}" alt="Image 1"> -->
+      </div>
+      <!-- <div class="add-more">
+            <button onclick="addImage()">Add More Images</button>
+        </div> -->
+      <div class="upload-image">
+        <input
+          type="file"
+          id="imageUpload"
+          accept="image/*"
+          onchange="uploadImage(event)"
+        />
+        <label for="imageUpload">Upload Image</label>
+      </div>
+      <div class="image-operations">
+        <button onclick="extractChannelA()">Extract Channel A</button>
+        <button onclick="applyThreshold()">Apply Threshold</button>
+        <button onclick="segmentImage()">Segment Image</button>
+        <button onclick="applyWatershed()">Apply Watershed</button>
+        <button onclick="predictClass()">Predict Class</button>
+      </div>
+      <div class="prediction">
+        <h2>Predicted Class: <span id="predictedClass"></span></h2>
+      </div>
+    </main>
+    <script src="../static/script.js"></script>
+  </body>
+</html>
